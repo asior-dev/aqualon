@@ -1,0 +1,79 @@
+:root {
+    --aqua-blue: #24b8de;
+    --text-pink: #f3519a;
+    --text-dark: #333;
+    --text-light: #ffffff; /* Dodajemy biały do zmiennych */
+}
+
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f0f0;
+    overflow: hidden;
+}
+
+#hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* NOWY KOD: Style dla zaokrąglonego prostokąta */
+.dynamic-container {
+    width: 90vw;
+    height: 30vh;
+    max-width: 1800px;
+    border-radius: 30px;
+    background-color: var(--aqua-blue);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+/* Poniższe style są z Twojego kodu, lekko dostosowane */
+.static-text {
+    font-size: clamp(2rem, 8vw, 5rem);
+    font-family: 'Pacifico';
+    font-weight:300;
+    font-weight: 500;
+    color: var(--text-pink);
+    margin-bottom: 20px;
+}
+
+.wave-text-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dynamic-text {
+    font-size: clamp(3rem, 15vw, 10rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.1;
+}
+
+.wave-text-container h2:nth-child(1) {
+    color: var(--text-light); /* Zmienione na biały dla lepszego kontrastu */
+    animation: wave_animate 4s ease-in-out infinite;
+}
+
+.wave-text-container h2:nth-child(2) {
+    color: transparent;
+    -webkit-text-stroke: 5px var(--text-light);
+    position: absolute;
+}
+
+@keyframes wave_animate {
+    0%, 100% {
+        clip-path: polygon(0% 45%, 15% 44%, 32% 50%, 54% 60%, 70% 61%, 84% 59%, 100% 52%, 100% 100%, 0% 100%);
+    }
+    50% {
+        clip-path: polygon(0% 60%, 16% 65%, 34% 66%, 51% 62%, 67% 50%, 84% 45%, 100% 46%, 100% 100%, 0% 100%);
+    }
+}

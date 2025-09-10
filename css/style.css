@@ -1,0 +1,752 @@
+/*===== GOOGLE FONTS =====*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
+
+/*===== ZMIENNE CSS =====*/
+:root {
+    --color-primary: #1ac8f1; /* Aqua Blue */
+    --color-accent: #FF69B4; /* Pink */
+    --color-dark: #1a1a1a;
+    --color-light: #ffffff;
+    --color-text: #333333;
+    --color-text-light: #777777;
+    --color-border: #eeeeee;
+
+    --font-family: 'Poppins', sans-serif;
+}
+
+/*===== RESET I STYLE GLOBALNE =====*/
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: var(--font-family);
+    color: var(--color-text);
+    background-color: var(--color-light);
+    line-height: 1.7;
+}
+
+h1, h2, h3, h4 {
+    color: var(--color-dark);
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+a {
+    text-decoration: none;
+    color: var(--color-primary);
+}
+
+.container {
+    width: 90%;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.section-padding {
+    padding: 100px 0;
+    border-top: 1px solid var(--color-border);
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    margin-bottom: 15px;
+    position: relative;
+    display: inline-block;
+}
+
+.section-title::before {
+    content: '';
+    position: absolute;
+    width: 50px;
+    height: 4px;
+    background-color: var(--color-accent);
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.section-subtitle {
+    color: var(--color-text-light);
+}
+
+
+/*===== NAGŁÓWEK I NAWIGACJA =====*/
+.main-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(10px);
+    z-index: 100;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+    position: relative;
+}
+
+.logo {
+    font-size: 1.8rem;
+    font-weight: 900;
+    color: var(--color-dark);
+}
+
+/* Przycisk MENU */
+.menu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-dark);
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.hamburger span {
+    display: block;
+    width: 24px;
+    height: 3px;
+    background-color: var(--color-dark);
+    margin: 4px 0;
+}
+
+/* Wrapper i ukryte linki nawigacji */
+.nav-links-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* Rozciągnięty na całą wysokość belki */
+    display: flex;
+    justify-content: center; /* Wyśrodkowanie linków */
+    align-items: center;
+    visibility: hidden; /* Domyślnie ukryty */
+}
+
+.nav-links-wrapper ul {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 30px;
+}
+
+.nav-links-wrapper li {
+    transform: translateY(-80px); /* Pozycja startowa NAD belką */
+    opacity: 0;
+}
+
+.nav-links-wrapper a {
+    color: var(--color-dark);
+    font-weight: 700;
+    transition: color 0.3s ease;
+}
+.nav-links-wrapper a:hover {
+    color: var(--color-primary);
+}
+.nav-links-wrapper .nav-button {
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+.nav-links-wrapper .nav-button:hover {
+    background-color: var(--color-accent);
+    color: var(--color-light);
+}
+/* Stały przycisk "Kontakt" */
+.contact-button {
+    color: var(--color-primary);
+    font-weight: 700;
+    border: 2px solid var(--color-primary);
+    padding: 8px 20px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+    color: var(--color-light);
+}
+
+
+/*===== SEKCJA HERO =====*/
+#hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f5f5f5;
+}
+
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero-headline-static {
+    font-family: 'Pacifico', cursive;
+    font-size: clamp(3rem, 10vw, 6rem);
+    font-weight: 400;
+    text-transform: none;
+    color: var(--color-dark);
+    line-height: 1;
+    /* ZMIANA: Ustawiamy pozycję, aby napis był ZAWSZE na wierzchu */
+    position: relative;
+    z-index: 2;
+}
+
+/* Kontener na dynamiczny tekst */
+.hero-headline-dynamic {
+    /* ZMIANA: Tło zmienione na aqua */
+    background-color: var(--color-primary); 
+    border-radius: 20px;
+    margin-top: -30px; /* Lekkie nasunięcie pod napis "Pływanie to" */
+    padding: 20px 40px;
+    /* ZMIANA: Stała minimalna wysokość, aby zapobiec zapadaniu się */
+    height: 150px; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Ustawiamy go pod napisem "Pływanie to" */
+}
+
+/* Styl dla dynamicznie zmieniającego się tekstu (bez zmian) */
+.dynamic-text {
+    font-family: var(--font-family);
+    font-size: clamp(1.8rem, 8vw, 4rem);
+    color: var(--color-light);
+    font-weight: 900;
+    text-transform: uppercase;
+    min-width: 350px;
+    text-align: center;
+}
+
+
+/*===== SEKCJA OFERTA (ACCORDION) =====*/
+.offer-accordion {
+    width: 100%;
+    border-top: 1px solid var(--color-border);
+}
+
+.accordion-item {
+    border-bottom: 1px solid var(--color-border);
+}
+
+.accordion-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.accordion-header:hover {
+    background-color: #f9f9f9;
+}
+
+/* Dodajemy różowy akcent do ikony przy najechaniu */
+.accordion-header:hover .icon-plus::before,
+.accordion-header:hover .icon-plus::after {
+    background-color: var(--color-accent);
+}
+
+.header-text h3 {
+    font-size: clamp(1.5rem, 4vw, 2.2rem);
+    margin: 0;
+    color: var(--color-dark);
+    line-height: 1.2;
+}
+.age-target {
+    font-size: 1rem;
+    color: var(--color-text-light);
+    font-weight: 400;
+    margin: 0;
+}
+
+/* Ikona plusa/minusa */
+.icon-plus {
+    width: 30px;
+    height: 30px;
+    position: relative;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.icon-plus::before, .icon-plus::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 3px;
+    background-color: var(--color-primary);
+    transform: translate(-50%, -50%);
+    /* ZMIANA #1: Dodajemy transition dla płynnej zmiany koloru */
+    transition: background-color 0.3s ease;
+}
+.icon-plus::after {
+    transform: translate(-50%, -50%) rotate(90deg);
+}
+.accordion-item.active .icon-plus {
+    transform: rotate(135deg);
+}
+
+/* Ukryta treść */
+.accordion-content {
+    display: none;
+    padding: 20px 40px 40px 40px;
+    border-top: 1px solid var(--color-border);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+.accordion-content p { color: var(--color-text-light); }
+
+/* Style dla kafelków wewnątrz akordeonu */
+.content-tile {
+    background-color: #fdfdfd;
+    border: 1px solid var(--color-border);
+    border-radius: 15px;
+    padding: 25px;
+}
+.content-tile h4 {
+    font-size: 1.3rem;
+    color: var(--color-primary);
+    margin-bottom: 10px;
+}
+
+/* Style dla aktywnego (rozwiniętego) elementu akordeonu */
+.accordion-item.active .accordion-header {
+    background-color: var(--color-primary);
+    transition: background-color 0.4s ease;
+}
+.accordion-item.active .header-text h3 {
+    color: var(--color-light);
+}
+
+/* ZMIANA #2: Zmieniamy kolor czcionki wieku w aktywnym nagłówku */
+.accordion-item.active .age-target {
+    color: var(--color-light);
+    opacity: 0.8; /* Lekko stonowany biały dla zachowania hierarchii */
+}
+
+.accordion-item.active .icon-plus::before,
+.accordion-item.active .icon-plus::after {
+    background-color: var(--color-light);
+}
+
+
+/*===== SEKCJA MOTYWACYJNA =====*/
+#motywacja {
+    background-color: var(--color-dark);
+    color: var(--color-light);
+    text-align: center;
+}
+.motivation-quote {
+    font-size: clamp(2rem, 6vw, 4rem);
+    color: var(--color-light);
+    max-width: 800px;
+    margin: 0 auto;
+}
+.motivation-quote::before { display: none; }
+
+
+/*===== SEKCJA "STARTUJ Z NAMI" =====*/
+.start-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    align-items: flex-start;
+}
+
+.coach-column {
+    text-align: center;
+}
+
+.coach-photo {
+    width: 400px;
+    height: 400px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 5px solid var(--color-primary);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.coach-column h3 {
+    font-size: 1.8rem;
+    color: var(--color-dark);
+    margin-bottom: 5px;
+}
+
+.coach-title {
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 15px;
+}
+
+.coach-bio {
+    color: var(--color-text-light);
+    text-align: left;
+}
+
+.info-column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.info-box {
+    background-color: var(--color-light);
+    border: 1px solid var(--color-border);
+    border-radius: 15px;
+    padding: 30px;
+}
+
+.info-box h4 {
+    font-size: 1.3rem;
+    color: var(--color-dark);
+    margin-bottom: 10px;
+}
+
+.info-button {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--color-primary);
+    font-weight: 700;
+    text-decoration: underline;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 200px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text-light);
+    margin-top: 20px;
+}
+
+
+/*===== SEKCJA CENNIK =====*/
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    align-items: start;
+}
+
+.pricing-card {
+    background-color: var(--color-light);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+}
+
+.pricing-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+}
+
+.card-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.card-price {
+    font-size: 3.5rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    line-height: 1;
+}
+
+.card-period {
+    color: var(--color-text-light);
+    margin-bottom: 30px;
+}
+
+.card-features {
+    list-style: none;
+    text-align: left;
+    margin-bottom: 40px;
+}
+
+.card-features li {
+    margin-bottom: 15px;
+}
+
+.card-button {
+    display: block;
+    width: 100%;
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    padding: 15px;
+    border-radius: 50px;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+
+.card-button:hover {
+    background-color: var(--color-accent);
+}
+
+/* Styl dla wyróżnionej karty */
+.pricing-card.featured {
+    border: 2px solid var(--color-primary);
+    transform: translateY(-15px);
+    /* Możemy dodać mu większy padding, by był fizycznie większy */
+    padding-top: 55px; /* Dodatkowy padding, aby zrekompensować odznakę */
+}
+
+.featured-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-accent);
+    color: var(--color-light);
+    padding: 5px 15px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 50px;
+}
+
+
+/*===== SEKCJA OPINIE =====*/
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.testimonial-card {
+    background-color: var(--color-light);
+    border: 1px solid var(--color-border);
+    border-radius: 20px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-rating {
+    display: inline-flex; /* Ustawia elementy w linii */
+    align-items: center;
+    gap: 6px; /* Odstęp między liczbą a gwiazdką */
+    background-color: var(--color-accent); /* Różowe tło */
+    color: var(--color-light); /* Biała czcionka */
+    padding: 6px 12px;
+    border-radius: 50px; /* Tworzy kształt kapsułki */
+    font-weight: 700;
+    font-size: 0.9rem;
+    margin-bottom: 15px;
+    align-self: flex-start; /* Wyrównuje do lewej */
+}
+
+.card-rating svg {
+    margin-top: -2px; /* Drobna korekta wizualna dla ikony */
+}
+
+.card-quote {
+    color: var(--color-text);
+    font-style: italic;
+    flex-grow: 1;
+    margin-bottom: 25px;
+}
+
+.card-author {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-top: 1px solid var(--color-border);
+    padding-top: 25px;
+}
+
+.card-author img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.author-info h4 {
+    margin: 0 0 3px 0;
+    color: var(--color-dark);
+    font-size: 1.1rem;
+}
+
+.author-info p {
+    margin: 0;
+    color: var(--color-text-light);
+    font-size: 0.9rem;
+}
+
+
+/*===== SEKCJA KONTAKT =====*/
+.contact-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr; /* Formularz zajmuje 2/3, dane 1/3 */
+    gap: 50px;
+    margin-top: 40px;
+}
+
+/* Dostosowanie do mniejszych ekranów */
+@media (max-width: 900px) {
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Stylowanie formularza */
+.form-group {
+    margin-bottom: 20px;
+}
+.form-group label {
+    display: block;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--color-dark);
+}
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid var(--color-border);
+    border-radius: 10px;
+    font-family: var(--font-family);
+    font-size: 1rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 3px rgba(0, 201, 184, 0.2);
+}
+
+.submit-button {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 50px;
+    background-color: var(--color-primary);
+    color: var(--color-light);
+    font-family: var(--font-family);
+    font-weight: 700;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.submit-button:hover {
+    background-color: var(--color-accent);
+}
+
+/* Stylowanie danych kontaktowych */
+.contact-details {
+    padding-left: 30px;
+    border-left: 1px solid var(--color-border);
+}
+.contact-details h4 {
+    font-size: 1.3rem;
+    color: var(--color-dark);
+    margin-bottom: 10px;
+}
+.contact-details p {
+    color: var(--color-text-light);
+    margin-bottom: 20px;
+}
+.contact-details ul {
+    list-style: none;
+    margin-bottom: 30px;
+}
+.contact-details ul li {
+    margin-bottom: 10px;
+}
+
+/* Stylowanie ikon social media */
+.social-icons {
+    display: flex;
+    gap: 15px;
+}
+.social-icons a {
+    width: 50px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid var(--color-border);
+    border-radius: 50%;
+    color: var(--color-dark);
+    font-weight: 700;
+    transition: all 0.3s ease;
+}
+.social-icons a:hover {
+    background-color: var(--color-primary);
+    border-color: var(--color-primary);
+    color: var(--color-light);
+    transform: translateY(-5px);
+}
+
+@media (max-width: 900px) {
+    .contact-details {
+        padding-left: 0;
+        border-left: none;
+        border-top: 1px solid var(--color-border);
+        padding-top: 40px;
+    }
+}
+
+
+
+/*===== STOPKA =====*/
+.main-footer {
+    padding: 40px 0;
+    background-color: #f5f5f5;
+    text-align: center;
+    color: var(--color-text-light);
+}
+
+
+/*===== STYLE DLA PODSTRON =====*/
+.subpage-main {
+    padding: 120px 0 60px 0;
+}
+.subpage-main h1 {
+    font-size: 3rem;
+    margin-bottom: 40px;
+    text-align: center;
+}
