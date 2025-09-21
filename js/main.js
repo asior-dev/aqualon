@@ -2,97 +2,117 @@ $(document).ready(function() {
     gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(TextPlugin); 
 
-    // --- LOGIKA NOWEGO MENU ---
+    // --- LOGIKA MENU (DESKTOP & MOBILE) ---
     const menuToggle = $(".menu-toggle");
     const navLinksWrapper = $(".nav-links-wrapper");
     const navLinks = $(".nav-links-wrapper li");
+    const menuOverlay = $(".menu-overlay");
     let isMenuOpen = false;
     let isAnimating = false;
+    const mobileBreakpoint = 992;
 
-    // Funkcja otwierania menu
-    function openMenu() {
-        if (isAnimating) return;
+    // --- Funkcje dla menu na DESKTOP ---
+    function openMenuDesktop() {
+        if (isAnimating || isMenuOpen) return;
         isAnimating = true;
 
         const tl = gsap.timeline({ onComplete: () => { isAnimating = false; isMenuOpen = true; } });
         
-        tl.to(menuToggle, { 
-            y: 30,
-            autoAlpha: 0, 
-            duration: 0.4, 
-            ease: "power2.in" 
-        })
-        .set(navLinksWrapper, { visibility: 'visible' })
-        .to(navLinks, { 
-            y: 0,
-            opacity: 1, 
-            duration: 0.6,
-            ease: "bounce.out",
-            stagger: 0.03
-        }, "-=0.2");
+        tl.to(menuToggle, { y: 30, autoAlpha: 0, duration: 0.4, ease: "power2.in" })
+          .set(navLinksWrapper, { visibility: 'visible' })
+          .to(navLinks, { y: 0, opacity: 1, duration: 0.6, ease: "bounce.out", stagger: 0.03 }, "-=0.2");
     }
 
-    // Funkcja zamykania menu (NOWA, DEDYKOWANA ANIMACJA)
-function closeMenu() {
-    if (isAnimating) return;
-    isAnimating = true;
+    function closeMenuDesktop() {
+        if (isAnimating || !isMenuOpen) return;
+        isAnimating = true;
 
-    const tl = gsap.timeline({ onComplete: () => { isAnimating = false; isMenuOpen = false; } });
+        const tl = gsap.timeline({ onComplete: () => { isAnimating = false; isMenuOpen = false; } });
 
-    // 1. Linki "spadają w dół"
-    tl.to(navLinks, {
-        y: 80,
-        opacity: 0,
-        duration: 0.3,
-        ease: "power2.in",
-        stagger: 0.03
-    })
-    // KLUCZOWA POPRAWKA: Resetujemy pozycję linków do stanu początkowego
-    .set(navLinks, { y: -80 }) 
-    
-    // 2. Przycisk "MENU" spada z góry z odbiciem
-    .fromTo(menuToggle, 
-        { y: -80, autoAlpha: 1 },
-        { y: 0, ease: "bounce.out", duration: 1 },
-        "-=0.1"
-    )
-    .set(navLinksWrapper, { visibility: 'hidden' });
-}
-    
+        tl.to(navLinks, { y: 80, opacity: 0, duration: 0.3, ease: "power2.in", stagger: 0.03 })
+          .set(navLinks, { y: -80 }) // Reset pozycji linków
+          .fromTo(menuToggle, { y: -80, autoAlpha: 1 }, { y: 0, ease: "bounce.out", duration: 1 }, "-=0.1")
+          .set(navLinksWrapper, { visibility: 'hidden' });
+    }
+
+    // --- Funkcje dla menu na MOBILE (off-canvas) ---
+    function openMenuMobile() {
+        if (isMenuOpen) return;
+        isMenuOpen = true;
+        menuToggle.addClass('active');
+        navLinksWrapper.addClass('active');
+        gsap.to(navLinksWrapper, { x: 0, duration: 0.5, ease: "power3.out" });
+        gsap.to(menuOverlay, { autoAlpha: 1, duration: 0.5, ease: "power3.out" });
+        $('body').css('overflow', 'hidden');
+    }
+
+    function closeMenuMobile() {
+        if (!isMenuOpen) return;
+        isMenuOpen = false;
+        menuToggle.removeClass('active');
+        navLinksWrapper.removeClass('active');
+        gsap.to(navLinksWrapper, { x: "100%", duration: 0.5, ease: "power3.in" });
+        gsap.to(menuOverlay, { autoAlpha: 0, duration: 0.5, ease: "power3.in" });
+        $('body').css('overflow', '');
+    }
+
     // Główny przełącznik
     function toggleMenu() {
-        if (!isMenuOpen) {
-            openMenu();
+        const isMobile = $(window).width() < mobileBreakpoint;
+        if (isMobile) {
+            if (!isMenuOpen) openMenuMobile();
+            else closeMenuMobile();
         } else {
-            closeMenu();
+            if (!isMenuOpen) openMenuDesktop();
+            else closeMenuDesktop();
         }
     }
 
+    // Funkcja zamykania menu (uniwersalna)
+    function closeMenu() {
+        const isMobile = $(window).width() < mobileBreakpoint;
+        if (isMobile) {
+            closeMenuMobile();
+        } else {
+            closeMenuDesktop();
+        }
+    }
+
+    // Event Listeners
     menuToggle.on('click', toggleMenu);
+    menuOverlay.on('click', closeMenu);
+    $('.nav-links-wrapper a').on('click', closeMenu);
 
     // Zamykanie menu przy scrollowaniu
     $(window).on('scroll', function() {
-        if (isMenuOpen) {
-            closeMenu();
-        }
+        if (isMenuOpen) closeMenu();
+    });
+
+    // Resetowanie stanu menu przy zmianie rozmiaru okna
+    $(window).on('resize', function() {
+        if (isMenuOpen) closeMenu();
+        // Reset styli inline, które mogły zostać po animacjach GSAP
+        gsap.set([navLinksWrapper, navLinks, menuToggle, menuOverlay], { clearProps: "all" });
+        $('body').css('overflow', '');
+        menuToggle.removeClass('active');
+        isMenuOpen = false;
+        isAnimating = false;
     });
 
     // --- Płynne przewijanie dla linków nawigacyjnych ---
     $('a[href^="#"]').on('click', function(e) {
         e.preventDefault();
-        
+        const target = this.hash;
+
         if (isMenuOpen) {
-            // Dajemy animacji zamknięcia wystarczająco dużo czasu
-            closeMenu(); 
+            // closeMenu() jest już wywoływane przez click event na linku
             setTimeout(() => {
-                const target = this.hash;
-                 if (target) {
+                if (target && $(target).length) {
                     $('html, body').animate({ scrollTop: $(target).offset().top - 80 }, 800);
                 }
-            }, 500); // Czekamy 0.5s
+            }, 500); // Czekamy na zakończenie animacji zamykania
         } else {
-            const target = this.hash;
-            if (target) {
+            if (target && $(target).length) {
                 $('html, body').animate({ scrollTop: $(target).offset().top - 80 }, 800);
             }
         }
@@ -104,24 +124,24 @@ function closeMenu() {
     });
 
     // --- Animacje przy przewijaniu strony (bez zmian) ---
-    const offerElements = document.querySelectorAll("#oferta .section-header, #oferta .class-item");
-    gsap.from(offerElements, {
+    // Animacja dla sekcji Oferta
+    gsap.from("#oferta .section-header, #oferta .accordion-item", {
         scrollTrigger: { trigger: "#oferta", start: "top 80%", toggleActions: "play none none none" },
-        opacity: 0, y: 50, duration: 0.8, stagger: 0.1, ease: "power3.out"
+        opacity: 0,
+        y: 50,
+        duration: 0.8,
+        stagger: 0.15,
+        ease: "power3.out"
     });
 
-        // Animacja dla sekcji Motywacja (nowa wersja)
-    gsap.from(".quote-line", {
+    // Animacja dla sekcji Motywacja
+    gsap.from(".motivation-quote", {
         scrollTrigger: {
             trigger: "#motywacja",
             start: "top 70%",
             toggleActions: "play none none none",
         },
-        opacity: 0,
-        y: 40,
-        duration: 1,
-        ease: "power3.out",
-        stagger: 0.4, // Opóźnienie dla każdej kolejnej linii
+        opacity: 0, y: 40, duration: 1, ease: "power3.out"
     });
 
     // --- ANIMACJA SEKCJI HERO ---
@@ -224,7 +244,8 @@ if (dynamicTextElement) {
         stagger: 0.2
     });
 
-    gsap.from("#cennik .pricing-card", {
+    // Animacja dla sekcji Cennik
+    gsap.from("#cennik .pricing-card-new", {
         scrollTrigger: {
             trigger: "#cennik",
             start: "top 80%",
@@ -237,7 +258,7 @@ if (dynamicTextElement) {
         stagger: 0.2
     });
 
-        // Animacja dla sekcji Opinie
+    // Animacja dla sekcji Opinie
     gsap.from("#opinie .testimonial-card", {
         scrollTrigger: {
             trigger: "#opinie",
@@ -251,9 +272,8 @@ if (dynamicTextElement) {
         stagger: 0.2
     });
 
-
-        // Animacja dla sekcji Kontakt
-    gsap.from("#kontakt .contact-form-wrapper, #kontakt .contact-details", {
+    // Animacja dla sekcji Kontakt
+    gsap.from("#kontakt .contact-details, #kontakt .contact-socials", {
         scrollTrigger: {
             trigger: "#kontakt",
             start: "top 80%",

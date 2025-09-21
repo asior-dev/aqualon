@@ -18,7 +18,7 @@
 
 <header class="main-header">
     <nav class="main-nav container">
-        <a href="index.html" class="logo">Aqualon</a>
+        <a href="index.html" class="logo"><img src="images/aqualon.png" alt="Logo Aqualon"></a>
 
         <div class="nav-links-wrapper">
             <ul>
@@ -192,53 +192,43 @@
             <h2 class="section-title">Cennik Zajęć Indywidualnych</h2>
             <p class="section-subtitle">Wybierz opcję, która najlepiej odpowiada Twoim potrzebom. Inwestycja w umiejętność pływania to inwestycja na całe życie.</p>
         </div>
-        <div class="pricing-container">
-            <div class="pricing-category">
-                <h3 class="category-title">Dzieci, Młodzież i Dorośli</h3>
-                <div class="pricing-table-wrapper">
-                    <div class="pricing-table">
-                        <div class="table-header">
-                            <h4>Lekcja 45 min</h4>
-                            <p>Intensywna nauka i doskonalenie</p>
-                            <div class="recommended-badge adult-teen-badge">Polecane dla dorosłych i młodzieży</div>
-                        </div>
-                        <ul class="table-body">
-                            <li><span>1 osoba</span><span class="price-tag">120 PLN</span></li>
-                            <li><span>2 osoby</span><span class="price-tag">180 PLN</span></li>
-                            <li><span>3 osoby</span><span class="price-tag">210 PLN</span></li>
-                        </ul>
-                    </div>
-                    <div class="pricing-table">
-                        <div class="table-header">
-                            <h4>Lekcja 30 min</h4>
-                            <p>Szybka dawka wiedzy i praktyki</p>
-                             <div class="recommended-badge kids-badge">Idealne dla dzieci</div>
-                        </div>
-                        <ul class="table-body">
-                            <li><span>1 osoba</span><span class="price-tag">90 PLN</span></li>
-                            <li><span>2 osoby</span><span class="price-tag">140 PLN</span></li>
-                            <li><span>3 osoby</span><span class="price-tag">180 PLN</span></li>
-                        </ul>
-                    </div>
-                </div>
-                <a href="#kontakt" class="category-button">Umów lekcję</a>
+        <div class="pricing-grid-new">
+            <div class="pricing-card-new">
+                <h3 class="pricing-card-title">Niemowlęta</h3>
+                <p class="pricing-card-subtitle">Lekcje 30-minutowe z opiekunem w wodzie</p>
+                <ul class="pricing-list-infants">
+                    <li><span>1 dziecko + opiekun</span> <span class="price">120 PLN</span></li>
+                    <li><span>2 dzieci + opiekunowie</span> <span class="price">220 PLN</span></li>
+                    <li><span>3 dzieci + opiekunowie</span> <span class="price">280 PLN</span></li>
+                </ul>
+                <a href="#kontakt" class="pricing-card-button">Umów lekcję</a>
             </div>
-            <div class="pricing-category">
-                <h3 class="category-title">Niemowlęta</h3>
-                <div class="pricing-table-wrapper">
-                    <div class="pricing-table">
-                        <div class="table-header">
-                            <h4>Lekcja 30 min</h4>
-                            <p>Bezpieczne oswajanie z wodą</p>
-                        </div>
-                        <ul class="table-body">
-                            <li><span>1 dziecko + opiekun</span><span class="price-tag">120 PLN</span></li>
-                            <li><span>2 dzieci + opiekunowie</span><span class="price-tag">220 PLN</span></li>
-                            <li><span>3 dzieci + opiekunowie</span><span class="price-tag">280 PLN</span></li>
-                        </ul>
+            <div class="pricing-card-new">
+                <h3 class="pricing-card-title">Dzieci, Młodzież i Dorośli</h3>
+                <p class="pricing-card-subtitle">Elastyczne zajęcia dopasowane do Twoich możliwości</p>
+                <div class="pricing-table-main">
+                    <div class="pricing-table-header">
+                        <div>Liczba osób</div>
+                        <div>30 min</div>
+                        <div>45 min</div>
+                    </div>
+                    <div class="pricing-table-row">
+                        <div>1 osoba</div>
+                        <div>90 PLN</div>
+                        <div>120 PLN</div>
+                    </div>
+                    <div class="pricing-table-row">
+                        <div>2 osoby</div>
+                        <div>140 PLN</div>
+                        <div>180 PLN</div>
+                    </div>
+                    <div class="pricing-table-row">
+                        <div>3 osoby</div>
+                        <div>180 PLN</div>
+                        <div>210 PLN</div>
                     </div>
                 </div>
-                <a href="#kontakt" class="category-button">Umów lekcję</a>
+                <a href="#kontakt" class="pricing-card-button">Umów lekcję</a>
             </div>
         </div>
     </div>
@@ -303,37 +293,25 @@
 <section id="kontakt" class="section-padding">
     <div class="container">
         <div class="section-header">
-            <h2 class="section-title">Zróbmy pierwszy krok</h2>
-            <p class="section-subtitle">Twoja przygoda z pływaniem zaczyna się tutaj. Wypełnij formularz lub zadzwoń – chętnie odpowiemy na wszystkie Twoje pytania.</p>
+            <h2 class="section-title">Zrób pierwszy krok</h2>
+            <p class="section-subtitle">Twoja przygoda z pływaniem zaczyna się tutaj. Zadzwoń lub napisz do nas – chętnie odpowiemy na wszystkie Twoje pytania.</p>
         </div>
 
-        <div class="contact-grid">
-            <div class="contact-form-wrapper">
-                <form action="#" method="POST">
-                    <div class="form-group">
-                        <label for="name">Imię i nazwisko</label>
-                        <input type="text" id="name" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email">Adres e-mail</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message">Wiadomość</label>
-                        <textarea id="message" name="message" rows="5" required></textarea>
-                    </div>
-                    <button type="submit" class="submit-button">Wyślij wiadomość</button>
-                </form>
-            </div>
-
+        <div class="contact-content">
             <div class="contact-details">
-                <h4>Kontakt bezpośredni</h4>
-                <p>Wolisz porozmawiać? Jesteśmy do Twojej dyspozycji.</p>
+                <h4>Skontaktuj się z nami</h4>
                 <ul>
-                    <li><strong>Telefon:</strong> <a href="tel:+48886083222">+48 886 083 222</a></li>
-                    <li><strong>E-mail:</strong> <a href="mailto:plywanie.aqualon@gmail.com">plywanie.aqualon@gmail.com</a></li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.63A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        <a href="tel:+48886083222">+48 886 083 222</a>
+                    </li>
+                    <li>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        <a href="mailto:plywanie.aqualon@gmail.com">plywanie.aqualon@gmail.com</a>
+                    </li>
                 </ul>
-
+            </div>
+            <div class="contact-socials">
                 <h4>Znajdź nas w sieci</h4>
                 <div class="social-icons">
                     <a href="https://www.facebook.com/profile.php?id=61573787564847" target="_blank" aria-label="Facebook">FB</a>
@@ -360,4 +338,3 @@
     <script src="js/main.js"></script>
 </body>
 </html>
-
