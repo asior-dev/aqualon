@@ -143,11 +143,11 @@ a {
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%; /* Rozciągnięty na całą wysokość belki */
+    height: 100%;
     display: flex;
-    justify-content: center; /* Wyśrodkowanie linków */
+    justify-content: center;
     align-items: center;
-    visibility: hidden; /* Domyślnie ukryty */
+    visibility: hidden;
 }
 
 .nav-links-wrapper ul {
@@ -158,7 +158,7 @@ a {
 }
 
 .nav-links-wrapper li {
-    transform: translateY(-80px); /* Pozycja startowa NAD belką */
+    transform: translateY(-80px);
     opacity: 0;
 }
 
@@ -221,27 +221,24 @@ a {
     text-transform: none;
     color: var(--color-dark);
     line-height: 1;
-    /* ZMIANA: Ustawiamy pozycję, aby napis był ZAWSZE na wierzchu */
     position: relative;
     z-index: 2;
 }
 
 /* Kontener na dynamiczny tekst */
 .hero-headline-dynamic {
-    /* ZMIANA: Tło zmienione na aqua */
     background-color: var(--color-primary); 
     border-radius: 20px;
-    margin-top: -30px; /* Lekkie nasunięcie pod napis "Pływanie to" */
+    margin-top: -30px;
     padding: 20px 40px;
-    /* ZMIANA: Stała minimalna wysokość, aby zapobiec zapadaniu się */
     height: 150px; 
     display: flex;
     justify-content: center;
     align-items: center;
-    z-index: 1; /* Ustawiamy go pod napisem "Pływanie to" */
+    z-index: 1;
 }
 
-/* Styl dla dynamicznie zmieniającego się tekstu (bez zmian) */
+/* Styl dla dynamicznie zmieniającego się tekstu */
 .dynamic-text {
     font-family: var(--font-family);
     font-size: clamp(1.8rem, 8vw, 4rem);
@@ -276,7 +273,6 @@ a {
     background-color: #f9f9f9;
 }
 
-/* Dodajemy różowy akcent do ikony przy najechaniu */
 .accordion-header:hover .icon-plus::before,
 .accordion-header:hover .icon-plus::after {
     background-color: var(--color-accent);
@@ -295,7 +291,6 @@ a {
     margin: 0;
 }
 
-/* Ikona plusa/minusa */
 .icon-plus {
     width: 30px;
     height: 30px;
@@ -311,7 +306,6 @@ a {
     height: 3px;
     background-color: var(--color-primary);
     transform: translate(-50%, -50%);
-    /* ZMIANA #1: Dodajemy transition dla płynnej zmiany koloru */
     transition: background-color 0.3s ease;
 }
 .icon-plus::after {
@@ -356,7 +350,7 @@ a {
 /* ZMIANA #2: Zmieniamy kolor czcionki wieku w aktywnym nagłówku */
 .accordion-item.active .age-target {
     color: var(--color-light);
-    opacity: 0.8; /* Lekko stonowany biały dla zachowania hierarchii */
+    opacity: 0.8;
 }
 
 .accordion-item.active .icon-plus::before,
@@ -529,8 +523,7 @@ a {
 .pricing-card.featured {
     border: 2px solid var(--color-primary);
     transform: translateY(-15px);
-    /* Możemy dodać mu większy padding, by był fizycznie większy */
-    padding-top: 55px; /* Dodatkowy padding, aby zrekompensować odznakę */
+    padding-top: 55px;
 }
 
 .featured-badge {
@@ -564,21 +557,21 @@ a {
 }
 
 .card-rating {
-    display: inline-flex; /* Ustawia elementy w linii */
+    display: inline-flex;
     align-items: center;
-    gap: 6px; /* Odstęp między liczbą a gwiazdką */
-    background-color: var(--color-accent); /* Różowe tło */
-    color: var(--color-light); /* Biała czcionka */
+    gap: 6px;
+    background-color: var(--color-accent);
+    color: var(--color-light);
     padding: 6px 12px;
-    border-radius: 50px; /* Tworzy kształt kapsułki */
+    border-radius: 50px;
     font-weight: 700;
     font-size: 0.9rem;
     margin-bottom: 15px;
-    align-self: flex-start; /* Wyrównuje do lewej */
+    align-self: flex-start;
 }
 
 .card-rating svg {
-    margin-top: -2px; /* Drobna korekta wizualna dla ikony */
+    margin-top: -2px;
 }
 
 .card-quote {
@@ -619,7 +612,7 @@ a {
 /*===== SEKCJA KONTAKT =====*/
 .contact-grid {
     display: grid;
-    grid-template-columns: 2fr 1fr; /* Formularz zajmuje 2/3, dane 1/3 */
+    grid-template-columns: 2fr 1fr;
     gap: 50px;
     margin-top: 40px;
 }

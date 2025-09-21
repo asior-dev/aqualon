@@ -7,7 +7,7 @@ gsap.registerPlugin(TextPlugin);
     const navLinksWrapper = $(".nav-links-wrapper");
     const navLinks = $(".nav-links-wrapper li");
     let isMenuOpen = false;
-    let isAnimating = false; // Zabezpieczenie przed szybkim klikaniem
+    let isAnimating = false;
 
     // Funkcja otwierania menu
     function openMenu() {
