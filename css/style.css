@@ -549,14 +549,23 @@ a {
 
 .map-placeholder {
     width: 100%;
-    height: 200px;
+    height: 250px;
     background-color: #f0f0f0;
     border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: var(--color-text-light);
     margin-top: 20px;
+    overflow: hidden;
+}
+
+.map-placeholder iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+    transition: filter 0.4s ease;
+    filter: grayscale(100%);
+}
+
+.map-placeholder iframe:hover {
+    filter: grayscale(0%);
 }
 
 .pricing-grid-new {

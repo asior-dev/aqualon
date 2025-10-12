@@ -8,49 +8,77 @@ $(document).ready(function () {
         const body = $("body");
         const mobileBreakpoint = 992;
         let isMenuOpen = false;
+        let isAnimating = false; // Zapobiega wielokrotnemu klikaniu
 
-        function closeAllMenus() {
+        // --- NOWA, DEDYKOWANA FUNKCJA DO ZAMYKANIA NA DESKTOP ---
+        function closeMenuDesktop() {
+            if (!isMenuOpen || isAnimating) return; // Nie zamykaj, jeśli już jest zamknięte lub w trakcie animacji
+            isAnimating = true;
+            isMenuOpen = false;
+
+            const tl = gsap.timeline({ onComplete: () => isAnimating = false });
+            tl.to($(".nav-links-wrapper li"), { y: 80, opacity: 0, duration: 0.3, ease: "power2.in", stagger: 0.03 })
+                .set($(".nav-links-wrapper li"), { y: -80 })
+                .fromTo(menuToggle, { y: -80, autoAlpha: 1 }, { y: 0, ease: "bounce.out", duration: 1 }, "-=0.1")
+                .set(navLinksWrapper, { visibility: 'hidden' });
+        }
+
+        // Funkcja do zamykania menu na mobile
+        function closeMenuMobile() {
+            if (!isMenuOpen) return;
             isMenuOpen = false;
             body.removeClass('menu-is-open');
             menuToggle.removeClass('is-open');
             navLinksWrapper.removeClass('is-open');
             menuOverlay.removeClass('is-open');
-            gsap.set([".nav-links-wrapper", ".nav-links-wrapper li", ".menu-toggle"], { clearProps: "all" });
         }
 
+        // Główny przełącznik
         menuToggle.on('click', function () {
             if ($(window).width() <= mobileBreakpoint) {
+                // Logika mobilna
                 isMenuOpen = !isMenuOpen;
                 body.toggleClass('menu-is-open', isMenuOpen);
                 menuToggle.toggleClass('is-open', isMenuOpen);
                 navLinksWrapper.toggleClass('is-open', isMenuOpen);
                 menuOverlay.toggleClass('is-open', isMenuOpen);
             } else {
+                // Logika desktopowa
                 if (!isMenuOpen) {
+                    if (isAnimating) return;
+                    isAnimating = true;
                     isMenuOpen = true;
-                    const tl = gsap.timeline();
+                    const tl = gsap.timeline({ onComplete: () => isAnimating = false });
                     tl.to(menuToggle, { y: 30, autoAlpha: 0, duration: 0.4, ease: "power2.in" })
                         .set(navLinksWrapper, { visibility: 'visible' })
                         .to($(".nav-links-wrapper li"), { y: 0, opacity: 1, duration: 0.6, ease: "bounce.out", stagger: 0.03 }, "-=0.2");
                 } else {
-                    isMenuOpen = false;
-                    const tl = gsap.timeline();
-                    tl.to($(".nav-links-wrapper li"), { y: 80, opacity: 0, duration: 0.3, ease: "power2.in", stagger: 0.03 })
-                        .set($(".nav-links-wrapper li"), { y: -80 })
-                        .fromTo(menuToggle, { y: -80, autoAlpha: 1 }, { y: 0, ease: "bounce.out", duration: 1 }, "-=0.1")
-                        .set(navLinksWrapper, { visibility: 'hidden' });
+                    closeMenuDesktop(); // Używamy naszej nowej funkcji
                 }
             }
         });
 
-        $('.menu-overlay, .nav-links-wrapper a').on('click', closeAllMenus);
-        $(window).on('resize', closeAllMenus);
+        // Zamykanie przy scrollu (POPRAWIONE)
         $(window).on('scroll', function () {
-            // Sprawdzamy, czy jesteśmy w wersji desktopowej i czy menu jest otwarte
             if ($(window).width() > mobileBreakpoint && isMenuOpen) {
-                // Używamy tej samej, niezawodnej funkcji do zamykania menu
-                closeAllMenus();
+                closeMenuDesktop(); // Używamy naszej nowej funkcji
             }
+        });
+
+        // Zamykanie po kliknięciu w link lub nakładkę
+        $('.menu-overlay, .nav-links-wrapper a').on('click', function () {
+            if ($(window).width() <= mobileBreakpoint) {
+                closeMenuMobile();
+            }
+        });
+
+        // Reset przy zmianie rozmiaru okna
+        $(window).on('resize', function () {
+            // Resetuje stan i wszystkie style inline
+            gsap.set([navLinksWrapper, ".nav-links-wrapper li", menuToggle], { clearProps: "all" });
+            closeMenuMobile(); // Używamy prostego zamknięcia, bo GSAP i tak resetuje style
+            isMenuOpen = false;
+            isAnimating = false;
         });
     }
 
