@@ -2,102 +2,59 @@ $(document).ready(function() {
     gsap.registerPlugin(ScrollTrigger);
 gsap.registerPlugin(TextPlugin); 
 
-    // --- LOGIKA MENU (DESKTOP & MOBILE) ---
+    // === NOWA, NIEZAWODNA LOGIKA MENU ===
     const menuToggle = $(".menu-toggle");
     const navLinksWrapper = $(".nav-links-wrapper");
-    const navLinks = $(".nav-links-wrapper li");
-    const menuOverlay = $(".menu-overlay");
-    let isMenuOpen = false;
-    let isAnimating = false;
+    const body = $("body");
     const mobileBreakpoint = 992;
+    let isMenuOpen = false;
 
-    // --- Funkcje dla menu na DESKTOP ---
-    function openMenuDesktop() {
-        if (isAnimating || isMenuOpen) return;
-        isAnimating = true;
-
-        const tl = gsap.timeline({ onComplete: () => { isAnimating = false; isMenuOpen = true; } });
-        
-        tl.to(menuToggle, { y: 30, autoAlpha: 0, duration: 0.4, ease: "power2.in" })
-          .set(navLinksWrapper, { visibility: 'visible' })
-          .to(navLinks, { y: 0, opacity: 1, duration: 0.6, ease: "bounce.out", stagger: 0.03 }, "-=0.2");
-    }
-
-    function closeMenuDesktop() {
-        if (isAnimating || !isMenuOpen) return;
-        isAnimating = true;
-
-        const tl = gsap.timeline({ onComplete: () => { isAnimating = false; isMenuOpen = false; } });
-
-        tl.to(navLinks, { y: 80, opacity: 0, duration: 0.3, ease: "power2.in", stagger: 0.03 })
-          .set(navLinks, { y: -80 }) // Reset pozycji linków
-          .fromTo(menuToggle, { y: -80, autoAlpha: 1 }, { y: 0, ease: "bounce.out", duration: 1 }, "-=0.1")
-          .set(navLinksWrapper, { visibility: 'hidden' });
-    }
-
-    // --- Funkcje dla menu na MOBILE (off-canvas) ---
-    function openMenuMobile() {
-        if (isMenuOpen) return;
-        isMenuOpen = true;
-        menuToggle.addClass('active');
-        navLinksWrapper.addClass('active');
-        gsap.to(navLinksWrapper, { x: 0, duration: 0.5, ease: "power3.out" });
-        gsap.to(menuOverlay, { autoAlpha: 1, duration: 0.5, ease: "power3.out" });
-        $('body').css('overflow', 'hidden');
-    }
-
-    function closeMenuMobile() {
-        if (!isMenuOpen) return;
+    // Funkcja resetująca wszystkie style menu (klucz do niezawodności)
+    function resetMenu() {
+        body.removeClass('menu-is-open');
+        // Resetuje style inline dodane przez GSAP, aby nie psuły wersji mobilnej
+        gsap.set([navLinksWrapper, ".nav-links-wrapper li", menuToggle], { clearProps: "all" });
         isMenuOpen = false;
-        menuToggle.removeClass('active');
-        navLinksWrapper.removeClass('active');
-        gsap.to(navLinksWrapper, { x: "100%", duration: 0.5, ease: "power3.in" });
-        gsap.to(menuOverlay, { autoAlpha: 0, duration: 0.5, ease: "power3.in" });
-        $('body').css('overflow', '');
     }
-
+    
     // Główny przełącznik
-    function toggleMenu() {
-        const isMobile = $(window).width() < mobileBreakpoint;
-        if (isMobile) {
-            if (!isMenuOpen) openMenuMobile();
-            else closeMenuMobile();
+    menuToggle.on('click', function() {
+        if ($(window).width() < mobileBreakpoint) {
+            // Logika mobilna: po prostu przełącz klasę na body
+            body.toggleClass('menu-is-open');
+            isMenuOpen = body.hasClass('menu-is-open');
         } else {
-            if (!isMenuOpen) openMenuDesktop();
-            else closeMenuDesktop();
+            // Logika desktopowa (z GSAP)
+            if (!isMenuOpen) {
+                isMenuOpen = true;
+                const tl = gsap.timeline();
+                tl.to(menuToggle, { y: 30, autoAlpha: 0, duration: 0.4, ease: "power2.in" })
+                  .set(navLinksWrapper, { visibility: 'visible' })
+                  .to($(".nav-links-wrapper li"), { y: 0, opacity: 1, duration: 0.6, ease: "bounce.out", stagger: 0.03 }, "-=0.2");
+            } else {
+                isMenuOpen = false;
+                const tl = gsap.timeline();
+                tl.to($(".nav-links-wrapper li"), { y: 80, opacity: 0, duration: 0.3, ease: "power2.in", stagger: 0.03 })
+                  .set($(".nav-links-wrapper li"), { y: -80 })
+                  .fromTo(menuToggle, { y: -80, autoAlpha: 1 }, { y: 0, ease: "bounce.out", duration: 1 }, "-=0.1")
+                  .set(navLinksWrapper, { visibility: 'hidden' });
+            }
         }
-    }
-
-    // Funkcja zamykania menu (uniwersalna)
-    function closeMenu() {
-        const isMobile = $(window).width() < mobileBreakpoint;
-        if (isMobile) {
-            closeMenuMobile();
-        } else {
-            closeMenuDesktop();
-        }
-    }
-
-    // Event Listeners
-    menuToggle.on('click', toggleMenu);
-    menuOverlay.on('click', closeMenu);
-    $('.nav-links-wrapper a').on('click', closeMenu);
-
-    // Zamykanie menu przy scrollowaniu
-    $(window).on('scroll', function() {
-        if (isMenuOpen) closeMenu();
     });
 
-    // Resetowanie stanu menu przy zmianie rozmiaru okna
+    // Zamykanie po kliknięciu w link lub nakładkę
+    $('body').on('click', '.menu-overlay, .nav-links-wrapper a', function() {
+        if (body.hasClass('menu-is-open')) {
+            resetMenu();
+        }
+    });
+    
+    // Reset przy zmianie rozmiaru okna
     $(window).on('resize', function() {
-        if (isMenuOpen) closeMenu();
-        // Reset styli inline, które mogły zostać po animacjach GSAP
-        gsap.set([navLinksWrapper, navLinks, menuToggle, menuOverlay], { clearProps: "all" });
-        $('body').css('overflow', '');
-        menuToggle.removeClass('active');
-        isMenuOpen = false;
-        isAnimating = false;
+        resetMenu();
     });
+
+    // === KONIEC LOGIKI MENU ===
 
     // --- Płynne przewijanie dla linków nawigacyjnych ---
     $('a[href^="#"]').on('click', function(e) {
@@ -148,11 +105,11 @@ gsap.registerPlugin(TextPlugin);
     const phrases = [
     "Pewność siebie",
     "Wolność w wodzie",
-    "Zdrowie i radość",
+    "Zdrowy kręgosłup",
     "Relaks i energia",
     "Nowa pasja",
     "Bezpieczeństwo",
-    "Przygoda"
+    "Dobre samopoczucie"
 ];
 
 let currentPhraseIndex = 0;

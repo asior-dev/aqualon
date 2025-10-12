@@ -27,6 +27,7 @@ body {
     color: var(--color-text);
     background-color: var(--color-light);
     line-height: 1.7;
+    overflow-x: hidden;
 }
 
 h1, h2, h3, h4 {
@@ -70,7 +71,7 @@ a {
 .section-title::before {
     content: '';
     position: absolute;
-    width: 50px;
+    width: 150px;
     height: 4px;
     background-color: var(--color-accent);
     bottom: -10px;
@@ -157,8 +158,6 @@ a {
 }
 
 .nav-links-wrapper li {
-    transform: translateY(-80px);
-    opacity: 0;
 }
 
 .nav-links-wrapper a {
@@ -772,64 +771,76 @@ a {
 }
 
 @media (max-width: 992px) {
+    /* Ukrycie i zmiana pozycji przycisków (bez zmian) */
     .menu-toggle {
-        position: static;
-        transform: none;
-        order: 3;
+        position: static; transform: none; order: 3;
     }
-    .menu-toggle-text {
-        display: none;
-    }
-    .main-nav {
-        justify-content: space-between;
-    }
-    .contact-button {
-        display: none;
-    }
+    .menu-toggle-text { display: none; }
+    .main-nav { justify-content: space-between; }
+    .contact-button { display: none; }
+
+    /* Definicja wysuwanego menu (z nową logiką) */
     .nav-links-wrapper {
-        position: fixed; /* Zmiana na fixed */
+        position: fixed;
         top: 0;
-        right: 0; /* Menu będzie po prawej stronie */
-        width: 300px; /* Szerokość menu */
+        right: 0;
+        width: 300px;
         max-width: 80%;
-        height: 100vh; /* Pełna wysokość */
+        height: 100vh;
         background: var(--color-light);
         flex-direction: column;
         justify-content: flex-start;
         align-items: center;
-        padding-top: 40px;
-        transform: translateX(100%); /* Schowane za prawą krawędzią */
-        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        visibility: visible;
-        z-index: 999; /* Menu na samej górze */
+        padding-top: 100px;
         box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        z-index: 999;
+        
+        /* Stan początkowy: schowane */
+        transform: translateX(100%);
+        transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    .nav-links-wrapper ul {
-        flex-direction: column;
-        gap: 0;
+
+    /* Stan po otwarciu (gdy body ma klasę .menu-is-open) */
+    body.menu-is-open .nav-links-wrapper {
+        transform: translateX(0);
     }
-    .nav-links-wrapper li {
-        opacity: 1;
-        transform: none;
-        width: 100%;
-        text-align: center;
+    
+    /* Układ linków w menu mobilnym (bez zmian) */
+    .nav-links-wrapper ul { flex-direction: column; gap: 0; width: 100%; }
+    .nav-links-wrapper li { width: 100%; text-align: center; }
+    .nav-links-wrapper a { display: block; padding: 20px; font-size: 1.5rem; }
+
+    /* Style dla przycisku "X" (teraz też zależne od klasy na body) */
+    body.menu-is-open .menu-toggle .hamburger span:nth-child(1) {
+        transform: translateY(7px) rotate(45deg);
     }
-    .nav-links-wrapper a {
-        display: block;
-        padding: 15px 20px; /* Mniejszy padding */
-        font-size: 1.5rem;
-    }
-    .menu-toggle.active .hamburger span:nth-child(1) {
-        transform: rotate(45deg) translate(6px, 6px);
-    }
-    .menu-toggle.active .hamburger span:nth-child(2) {
+    body.menu-is-open .menu-toggle .hamburger span:nth-child(2) {
         opacity: 0;
     }
-    .menu-toggle.active .hamburger span:nth-child(3) {
-        transform: rotate(-45deg) translate(6px, -6px);
+    body.menu-is-open .menu-toggle .hamburger span:nth-child(3) {
+        transform: translateY(-7px) rotate(-45deg);
     }
+
+    /* Nakładka przyciemniająca tło */
     .menu-overlay {
-        display: block; /* Pokazujemy nakładkę tylko na mobile */
+        display: block;
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 998;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.5s ease, visibility 0.5s ease;
+    }
+    body.menu-is-open .menu-overlay {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    /* Blokada scrollowania tła */
+    body.menu-is-open {
+        overflow: hidden;
     }
 }
 
@@ -848,5 +859,40 @@ a {
     }
     .pricing-table-row div:not(:first-child) {
         font-size: 1rem;
+    }
+}
+@media (min-width: 993px) {
+    .nav-links-wrapper {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        visibility: hidden;
+    }
+
+    .nav-links-wrapper ul {
+        display: flex;
+        align-items: center;
+        list-style: none;
+        gap: 30px;
+    }
+
+    .nav-links-wrapper li {
+        /* Przeniesione style są teraz bezpieczne tutaj */
+        transform: translateY(-80px);
+        opacity: 0;
+    }
+
+    .nav-links-wrapper a {
+        color: var(--color-dark);
+        font-weight: 700;
+        transition: color 0.3s ease;
+    }
+    .nav-links-wrapper a:hover {
+        color: var(--color-primary);
     }
 }
