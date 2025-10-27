@@ -167,11 +167,6 @@ $(document).ready(function () {
             opacity: 0, scale: 0.95, duration: 0.8, ease: "power3.out", stagger: 0.2
         });
 
-        gsap.from("#opinie .testimonial-card", {
-            scrollTrigger: { trigger: "#opinie", start: "top 80%", toggleActions: "play none none none" },
-            opacity: 0, y: 50, duration: 0.8, ease: "power3.out", stagger: 0.2
-        });
-
         gsap.from("#kontakt .contact-details, #kontakt .contact-socials", {
             scrollTrigger: { trigger: "#kontakt", start: "top 80%", toggleActions: "play none none none" },
             opacity: 0, y: 50, duration: 0.8, ease: "power3.out", stagger: 0.2
@@ -179,6 +174,32 @@ $(document).ready(function () {
     }
 
     initScrollAnimations();
+
+    function initTestimonialMarquee() {
+        const track = document.querySelector(".testimonials-track");
+        if (!track) return;
+
+        // Obliczamy dystans (połowa szerokości całego tracka)
+        const distance = track.scrollWidth / 2;
+        const duration = 60; // Czas trwania jednego cyklu w sekundach
+
+        // Tworzymy animację GSAP
+        const marqueeAnimation = gsap.to(track, {
+            x: -distance,
+            duration: duration,
+            ease: "none",
+            repeat: -1
+        });
+
+        // Pauza animacji po najechaniu myszką
+        const marqueeContainer = document.querySelector(".testimonials-marquee");
+        if (marqueeContainer) {
+            marqueeContainer.addEventListener('mouseenter', () => marqueeAnimation.pause());
+            marqueeContainer.addEventListener('mouseleave', () => marqueeAnimation.resume());
+        }
+    }
+    
+    initTestimonialMarquee();
 
     function initAccordion() {
         $('.accordion-header').on('click', function () {

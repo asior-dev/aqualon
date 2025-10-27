@@ -691,11 +691,49 @@ a {
     color: var(--color-dark);
 }
 
-.testimonials-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+/*===== SEKCJA OPINIE (MARQUEE) =====*/
+#opinie {
+    overflow: hidden; 
 }
+
+/* Usunęliśmy .container z selektora nagłówka, bo jest już globalny */
+#opinie .section-header { 
+    margin-bottom: 40px; 
+}
+
+.testimonials-marquee {
+    width: 100%; /* Teraz zajmuje szerokość kontenera */
+    overflow: hidden;
+    position: relative;
+    padding: 20px 0;
+}
+.testimonials-marquee::before, .testimonials-marquee::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    width: 80px; /* Mniejsza maska gradientowa */
+    height: 100%;
+    z-index: 2;
+}
+.testimonials-marquee::before {
+    left: 0;
+    background: linear-gradient(to right, var(--color-light), rgba(255, 255, 255, 0));
+}
+.testimonials-marquee::after {
+    right: 0;
+    background: linear-gradient(to left, var(--color-light), rgba(255, 255, 255, 0));
+}
+
+.testimonials-track {
+    display: flex;
+    gap: 30px;
+    width: fit-content;
+    /* ZMIANA: Usuwamy animację CSS */
+    /* animation: marquee 60s linear infinite; */
+    will-change: transform; /* Podpowiedź dla przeglądarki */
+}
+
+/* Usunęliśmy :hover pauzujący animację CSS */
 
 .testimonial-card {
     background-color: var(--color-light);
@@ -704,24 +742,21 @@ a {
     padding: 30px;
     display: flex;
     flex-direction: column;
+    width: 350px;
+    flex-shrink: 0;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
 }
 
-.card-rating {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
+.card-recommend {
+    display: inline-block;
+    align-self: flex-start;
     background-color: var(--color-accent);
     color: var(--color-light);
-    padding: 6px 12px;
+    padding: 6px 15px;
     border-radius: 50px;
     font-weight: 700;
     font-size: 0.9rem;
     margin-bottom: 15px;
-    align-self: flex-start;
-}
-
-.card-rating svg {
-    margin-top: -2px;
 }
 
 .card-quote {
@@ -732,31 +767,18 @@ a {
 }
 
 .card-author {
-    display: flex;
-    align-items: center;
-    gap: 15px;
     border-top: 1px solid var(--color-border);
-    padding-top: 25px;
-}
-
-.card-author img {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    object-fit: cover;
+    padding-top: 15px;
+    margin-top: auto;
 }
 
 .author-info h4 {
-    margin: 0 0 3px 0;
+    margin: 0;
     color: var(--color-dark);
     font-size: 1.1rem;
 }
 
-.author-info p {
-    margin: 0;
-    color: var(--color-text-light);
-    font-size: 0.9rem;
-}
+/* Usunęliśmy @keyframes marquee */
 
 .contact-content {
     display: flex;
