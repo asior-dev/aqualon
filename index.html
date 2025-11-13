@@ -11,15 +11,13 @@
 
     <title>Aqualon - Szkoła Pływania w Radomiu</title>
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/klaro@0.7.13/dist/klaro.min.css" />
+    <script src="js/klaro-config.js"></script>
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
-
+<div id="klaro"></div>
     <header class="main-header">
         <nav class="main-nav container">
             <a href="index.html" class="logo"><img src="images/aqualon.png" alt="Logo Aqualon"></a>
@@ -194,9 +192,11 @@
                             <p>Wszystkie zajęcia prowadzimy na basenie Neptun w Radomiu przy ul. Wyścigowej 49</p>
                             <div class="map-placeholder">
                                 <iframe
-                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2490.4692614035666!2d21.16933467819178!3d51.37605297178374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47185e9b0f5c25fb%3A0x1d5f978f812c2397!2sMOSiR%20Aquapark%20Neptun%20Radom!5e0!3m2!1spl!2spl!4v1760293928599!5m2!1spl!2spl"
+                                    data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2490.4692614035666!2d21.16933467819178!3d51.37605297178374!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47185e9b0f5c25fb%3A0x1d5f978f812c2397!2sMOSiR%20Aquapark%20Neptun%20Radom!5e0!3m2!1spl!2spl!4v1760293928599!5m2!1spl!2spl"
+                                    id="google-maps-iframe"
                                     width="400" height="300" style="border:0;" allowfullscreen="" loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                    referrerpolicy="no-referrer-when-downgrade">
+                                </iframe>
                             </div>
                         </div>
                     </div>
@@ -470,8 +470,12 @@
 
     <footer class="main-footer">
         <div class="container footer-content">
-            <p>&copy; 2025 Aqualon. Wszelkie prawa zastrzeżone.</p>
-            <a href="regulamin.html" class="footer-link">Regulamin</a>
+            <p>© 2025 Aqualon. Wszelkie prawa zastrzeżone.</p>
+            
+            <div class="footer-links">
+                <a href="regulamin.html" class="footer-link">Regulamin</a>
+                <a href="polityka-prywatnosci.html" class="footer-link">Polityka Prywatności</a>
+            </div>
         </div>
     </footer>
 
@@ -481,6 +485,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
     <script src="js/main.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/klaro@0.7.13/dist/klaro.min.js"></script>
 </body>
 
 </html>

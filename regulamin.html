@@ -4,12 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regulamin - Aqualon Szkoła Pływania</title>
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/klaro@0.7.13/dist/klaro.min.css" />
+    <script src="js/klaro-config.js"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    
+    <style>
+        .subpage-main {
+            padding-top: 120px; /* Zapewnia miejsce na stały nagłówek */
+            min-height: 80vh;
+        }
+        .subpage-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+        }
+        .subpage-content h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .subpage-content h3 { /* Zmienione z h3 na h2 dla lepszej semantyki */
+            font-size: 1.5rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid var(--color-primary, #007bff);
+            padding-bottom: 5px;
+        }
+        .subpage-content p,
+        .subpage-content li {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        .subpage-content ol,
+        .subpage-content ul {
+            padding-left: 20px;
+        }
+        .subpage-content strong {
+            font-weight: 700;
+        }
+    </style>
 </head>
 <body>
+
 <header class="main-header">
     <nav class="main-nav container">
         <a href="index.html" class="logo"><img src="images/aqualon.png" alt="Logo Aqualon"></a>
@@ -39,51 +81,103 @@
 
     <main class="subpage-main">
         <div class="container">
-            <h1>Regulamin Szkoły Pływania Aqualon</h1>
             
             <div class="subpage-content">
+                <h1>Regulamin Szkoły Pływania Aqualon</h1>
+                
                 <h3>§1 Postanowienia ogólne</h3>
-                <p>Niniejszy regulamin określa zasady uczestnictwa w zajęciach pływackich organizowanych przez Szkołę Pływania Aqualon. Zapisanie się na zajęcia jest równoznaczne z akceptacją postanowień niniejszego regulaminu.</p>
-
-                <h3>§2 Zapisy i płatności</h3>
                 <ol>
-                    <li>Zapisy na zajęcia są prowadzone telefonicznie, mailowo lub przez platformę Lupposystem.</li>
-                    <li>Opłaty za zajęcia indywidualne dokonywane są z góry przed rozpoczęciem lekcji, gotówką lub płatnością internetową TPay.</li>
-                    <li>W przypadku rezygnacji z zajęć, na krócej niż 24 godziny przed rozpoczęciem zajęć, wpłacona kwota nie podlega zwrotowi, z wyjątkiem sytuacji losowych rozpatrywanych indywidualnie.</li>
+                    <li>Niniejszy regulamin (dalej "Regulamin") określa zasady świadczenia usług drogą elektroniczną, zasady zawierania umów o udział w zajęciach pływackich oraz zasady uczestnictwa w zajęciach organizowanych przez Szkołę Pływania Aqualon.</li>
+                    <li>Usługodawcą i organizatorem zajęć jest **Aqualon Adrianna Michalska** z siedzibą w Radomiu (26-600) przy ul. Pawia 6/85, NIP: 9482524834, REGON: 542901373 (dalej "Usługodawca" lub "Aqualon").</li>
+                    <li>Serwis internetowy www.aqualon.pl (dalej "Serwis") ma charakter informacyjny. Zawarcie umowy o świadczenie usług (zapis na zajęcia) następuje za pośrednictwem zewnętrznego systemu rezerwacji Lupposystem, dostępnego pod adresem `https://aqualon.lupposystem.com` (dalej "System Rezerwacyjny").</li>
+                    <li>Użytkownik (dalej "Uczestnik" lub "Klient") to osoba korzystająca z usług Aqualon. W przypadku osób niepełnoletnich, Uczestnikiem jest osoba niepełnoletnia, natomiast wszelkie czynności prawne (zapis, płatność, akceptacja regulaminu) dokonywane są w jej imieniu przez opiekuna prawnego.</li>
+                    <li>Akceptacja Regulaminu jest dobrowolna, ale niezbędna do zawarcia umowy i uczestnictwa w zajęciach.</li>
                 </ol>
 
-                <h3>§3 Organizacja zajęć</h3>
+                <h3>§2 Zawarcie umowy</h3>
                 <ol>
-                    <li>Jednostka lekcyjna trwa 30 lub 45 minut, w zależności od wybranego wariantu.</li>
-                    <li>Uczestnik zobowiązany jest do przybycia na pływalnię co najmniej 10 minut przed rozpoczęciem zajęć w celu przygotowania się do lekcji.</li>
-                    <li>Szkoła Pływania Aqualon zastrzega sobie prawo do odwołania zajęć z przyczyn niezależnych (np. awaria basenu). W takim przypadku zajęcia zostaną przełożone na inny termin.</li>
+                    <li>Zapisy na zajęcia prowadzone są poprzez System Rezerwacyjny (Lupposystem) lub w wyjątkowych przypadkach telefonicznie bądź mailowo.</li>
+                    <li>Zawarcie umowy o świadczenie usługi (udział w zajęciach) następuje w momencie skutecznego dokonania rezerwacji terminu w Systemie Rezerwacyjnym, akceptacji niniejszego Regulaminu oraz dokonania płatności.</li>
+                    <li>Umowa dotyczy świadczenia usług nauki lub doskonalenia pływania w formie i terminie wybranym przez Klienta podczas rezerwacji.</li>
                 </ol>
 
-                <h3>§4 Nieobecności i odrabianie zajęć</h3>
+                <h3>§3 Metody Płatności</h3>
                 <ol>
-                    <li>Nieobecność na zajęciach należy zgłosić telefonicznie lub SMS-em najpóźniej 24 godziny przed planowaną lekcją.</li>
-                    <li>Zajęcia odwołane w terminie późniejszym niż 24 godziny przed ich rozpoczęciem uznaje się za odbyte i opłata za nie nie podlega zwrotowi ani przeniesieniu.</li>
-                    <li>Termin odrobienia zajęć ustalany jest indywidualnie z instruktorem, w miarę dostępności miejsc.</li>
+                    <li>Opłaty za zajęcia (indywidualne lub karnety) dokonywane są z góry przed rozpoczęciem świadczenia usługi, zgodnie z cennikiem dostępnym na Stronie oraz w Systemie Rezerwacyjnym.</li>
+                    <li>Usługodawca udostępnia następujące metody płatności:
+                        <ul>
+                            <li><strong>a) Płatności online:</strong> Realizowane za pośrednictwem Systemu Rezerwacyjnego, który integruje zewnętrznych operatorów płatności, w tym **PayNow** (obsługiwany przez mBank S.A. z siedzibą w Warszawie) oraz **TPay** (obsługiwany przez Krajowy Integrator Płatności S.A. z siedzibą w Poznaniu).</li>
+                            <li><strong>b) Gotówka:</strong> Płatność u instruktora przed rozpoczęciem zajęć (wyłącznie po wcześniejszym uzgodnieniu).</li>
+                        </ul>
+                    </li>
+                    <li>Podmiotami świadczącymi obsługę płatności online są operatorzy bramek płatniczych. Aqualon nie przechowuje danych kart płatniczych.</li>
                 </ol>
 
-                <h3>§5 Bezpieczeństwo i obowiązki uczestników</h3>
+                <h3>§4 Dostawa (Realizacja Usługi)</h3>
+                <ol>
+                    <li>Przez "Dostawę" rozumie się realizację zakupionej usługi, tj. przeprowadzenie zajęć nauki lub doskonalenia pływania.</li>
+                    <li>Usługa realizowana jest w miejscu (basen Neptun w Radomiu, ul. Wyścigowa 49) i terminie (dzień i godzina) precyzyjnie określonym przez Klienta podczas dokonywania rezerwacji w Systemie Rezerwacyjnym.</li>
+                    <li>Jednostka lekcyjna trwa 30 lub 45 minut, zgodnie z wybranym wariantem. Uczestnik zobowiązany jest do przybycia na pływalnię z odpowiednim wyprzedzeniem.</li>
+                </ol>
+                
+                <h3>§5 Prawo do odstąpienia od umowy (14 dni)</h3>
+                <ol>
+                    <li>Zgodnie z art. 38 pkt 12 Ustawy z dnia 30 maja 2014 r. o prawach konsumenta, prawo do odstąpienia od umowy zawartej na odległość (w terminie 14 dni) **nie przysługuje** konsumentowi w odniesieniu do umów "o świadczenie usług związanych z wypoczynkiem, wydarzeniami rozrywkowymi, **sportowymi** lub kulturalnymi, **jeżeli w umowie oznaczono dzień lub okres świadczenia usługi**".</li>
+                    <li>Umowa o udział w zajęciach pływackich Aqualon, zawarta poprzez System Rezerwacyjny, jest umową o świadczenie usług sportowo-rekreacyjnych w precyzyjnie oznaczonym terminie (konkretny dzień i godzina).</li>
+                    <li>W związku z powyższym, Uczestnikowi **nie przysługuje ustawowe prawo do odstąpienia od umowy** (14 dni) po dokonaniu rezerwacji i płatności za zajęcia w konkretnym terminie.</li>
+                </ol>
+
+                <h3>§6 Procedura Reklamacyjna</h3>
+                <ol>
+                    <li>Usługodawca zobowiązany jest do świadczenia usług z należytą starannością.</li>
+                    <li>Wszelkie reklamacje dotyczące świadczonych usług (np. niezgodności z ofertą, jakością prowadzenia zajęć) należy składać w formie pisemnej lub elektronicznej.</li>
+                    <li>Zgłoszenie reklamacyjne powinno zawierać co najmniej: dane Uczestnika, datę i opis zajęć, których dotyczy, oraz szczegółowy opis zastrzeżeń.</li>
+                    <li>Reklamacje należy kierować na adres e-mail: **plywanie.aqualon@gmail.com** lub na adres siedziby firmy.</li>
+                    <li>Usługodawca rozpatrzy reklamację w terminie 14 dni roboczych od dnia jej otrzymania i poinformuje Uczestnika o sposobie jej rozwiązania.</li>
+                </ol>
+
+                <h3>§7 Rezygnacja, Zwroty Towarów i Zwroty Pieniędzy</h3>
+                <ol>
+                    <li>Usługodawca nie prowadzi sprzedaży "towarów" w rozumieniu ustawy. Przedmiotem umowy są wyłącznie usługi, dlatego punkty dotyczące "zwrotu towarów" nie mają zastosowania.</li>
+                    <li>Niezależnie od wyłączenia prawa do odstąpienia od umowy (§5), Aqualon wprowadza umowne zasady rezygnacji z zajęć (odwołania rezerwacji):
+                        <ul>
+                            <li>a) Uczestnik ma prawo do bezkosztowego przełożenia terminu zajęć lub otrzymania pełnego zwrotu pieniędzy, jeśli zgłosi rezygnację (telefonicznie, SMS-em lub przez System Rezerwacyjny) na **więcej niż 24 godziny** przed planowanym rozpoczęciem zajęć.</li>
+                            <li>b) W przypadku zgłoszenia rezygnacji na **mniej niż 24 godziny** przed planowanym terminem, zajęcia uznaje się za odbyte. Opłata za te zajęcia nie podlega zwrotowi ani przeniesieniu na inny termin.</li>
+                        </ul>
+                    </li>
+                    <li>Zwroty pieniędzy, wynikające z uznanej reklamacji (§6) lub rezygnacji (§7.2.a), realizowane są w terminie do 14 dni roboczych.</li>
+                    <li>Zwrot środków następuje co do zasady tą samą metodą, którą dokonano płatności. W przypadku płatności PayNow lub TPay, zwrot nastąpi na konto bankowe powiązane z transakcją.</li>
+                </ol>
+
+                <h3>§8 Organizacja zajęć</h3>
+                <ol>
+                    <li>Szkoła Pływania Aqualon zastrzega sobie prawo do odwołania zajęć z przyczyn niezależnych (np. awaria basenu, choroba instruktora). W takim przypadku, wpłacona kwota zostaje w całości zwrócona lub, za zgodą Uczestnika, zajęcia zostają przełożone na inny, dogodny termin.</li>
+                    </ol>
+
+                <h3>§9 Bezpieczeństwo i obowiązki uczestników</h3>
                 <ol>
                     <li>Każdy uczestnik zajęć zobowiązany jest do przestrzegania regulaminu pływalni "Neptun".</li>
-                    <li>Uczestnicy (lub ich opiekunowie prawni) oświadczają, że nie ma przeciwwskazań zdrowotnych do udziału w zajęciach pływackich.</li>
+                    <li>Uczestnicy (lub ich opiekunowie prawni) oświadczają, że nie ma przeciwwskazień zdrowotnych do udziału w zajęciach pływackich.</li>
                     <li>Na zajęcia należy przynieść: strój kąpielowy, czepek, okulary pływackie, klapki oraz ręcznik.</li>
                     <li>Za bezpieczeństwo uczestników w trakcie zajęć odpowiada instruktor prowadzący. Poza czasem trwania lekcji, za bezpieczeństwo na terenie obiektu odpowiadają ratownicy oraz opiekunowie prawni.</li>
                 </ol>
 
-                <h3>§6 Postanowienia końcowe</h3>
-                <p>Szkoła Pływania Aqualon zastrzega sobie prawo do zmiany niniejszego regulaminu. O wszelkich zmianach uczestnicy zostaną poinformowani drogą mailową lub telefoniczną.</p>
+                <h3>§10 Postanowienia końcowe</h3>
+                <ol>
+                    <li>Szkoła Pływania Aqualon zastrzega sobie prawo do zmiany niniejszego regulaminu. O wszelkich zmianach Uczestnicy, którzy zawarli umowę, zostaną poinformowani drogą mailową.</li>
+                    <li>W sprawach nieuregulowanych niniejszym regulaminem zastosowanie mają przepisy Kodeksu Cywilnego oraz Ustawy o prawach konsumenta.</li>
+                </ol>
             </div>
-        </div>
+            </div>
     </main>
 
     <footer class="main-footer">
         <div class="container footer-content">
             <p>&copy; 2025 Aqualon. Wszelkie prawa zastrzeżone.</p>
-            <a href="regulamin.html" class="footer-link">Regulamin</a>
+            <div class="footer-links">
+                <a href="regulamin.html" class="footer-link">Regulamin</a>
+                <a href="polityka-prywatnosci.html" class="footer-link">Polityka Prywatności</a>
+            </div>
         </div>
     </footer>
 
@@ -93,5 +187,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Flip.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/TextPlugin.min.js"></script>
     <script src="js/main.js"></script>
+    
+    <script defer src="https://cdn.jsdelivr.net/npm/klaro@0.7.13/dist/klaro.min.js"></script>
 </body>
 </html>
