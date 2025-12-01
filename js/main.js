@@ -219,3 +219,75 @@ $(document).ready(function () {
 
     initAccordion();
 });
+
+/* =========================================
+   LOGIKA COOKIES I ŁADOWANIE ZASOBÓW
+   ========================================= */
+document.addEventListener("DOMContentLoaded", function() {
+    
+    const banner = document.getElementById('cookie-banner');
+    const btnAccept = document.getElementById('btn-accept-cookies');
+    const btnDecline = document.getElementById('btn-decline-cookies');
+    const cookieName = 'aqualon_consent';
+
+    // 1. Funkcja ładująca zasoby Google (Fonty i Mapy)
+    function loadExternalResources() {
+        console.log("Ładowanie zasobów Google...");
+
+        // A. Google Fonts
+        const links = [
+            { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+            { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: 'anonymous' },
+            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Pacifico&display=swap' },
+            { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap' }
+        ];
+        links.forEach(linkInfo => {
+            if (!document.querySelector(`link[href="${linkInfo.href}"]`)) { // Sprawdź czy już nie dodano
+                const link = document.createElement('link');
+                link.rel = linkInfo.rel;
+                link.href = linkInfo.href;
+                if (linkInfo.crossorigin) link.crossOrigin = linkInfo.crossorigin;
+                document.head.appendChild(link);
+            }
+        });
+
+        // B. Google Maps (tylko jeśli iframe istnieje na stronie)
+        const iframe = document.getElementById('google-maps-iframe');
+        if (iframe && iframe.dataset.src) {
+            iframe.src = iframe.dataset.src;
+            iframe.removeAttribute('data-src'); // Sprzątanie
+        }
+    }
+
+    // 2. Sprawdź czy użytkownik już podjął decyzję
+    const consent = localStorage.getItem(cookieName);
+
+    if (consent === 'accepted') {
+        // Użytkownik już kiedyś zaakceptował -> ładujemy od razu
+        loadExternalResources();
+    } else if (consent === 'declined') {
+        // Użytkownik odmówił -> nie robimy nic
+    } else {
+        // Brak decyzji -> Pokaż baner (po chwili opóźnienia dla lepszego efektu)
+        setTimeout(() => {
+            if(banner) banner.style.display = 'block';
+        }, 500);
+    }
+
+    // 3. Obsługa kliknięcia "Zgadzam się"
+    if(btnAccept) {
+        btnAccept.addEventListener('click', function() {
+            localStorage.setItem(cookieName, 'accepted'); // Zapisz zgodę
+            loadExternalResources(); // Załaduj zasoby
+            banner.style.display = 'none'; // Ukryj baner
+        });
+    }
+
+    // 4. Obsługa kliknięcia "Tylko niezbędne" (Odmowa)
+    if(btnDecline) {
+        btnDecline.addEventListener('click', function() {
+            localStorage.setItem(cookieName, 'declined'); // Zapisz odmowę
+            banner.style.display = 'none'; // Ukryj baner
+        });
+    }
+});
